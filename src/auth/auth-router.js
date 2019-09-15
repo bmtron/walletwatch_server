@@ -1,10 +1,11 @@
 const express = require('express')
 const AuthService = require('./auth-service')
 const authRouter = express.Router()
+const jwt = require('jsonwebtoken')
 const jsonBodyParser = express.json()
 
-authRouter
-    .post('/', jsonBodyParser, (req, res, next) => {
+authRouter.route('/')
+    .post(jsonBodyParser, (req, res, next) => {
         const {user_name, password } = req.body
         const loginUser = { user_name, password }
 
@@ -38,5 +39,31 @@ authRouter
         .catch(next)
 
     })
+authRouter.route('/jwt_auth')
+.post(jsonBodyParser, (req, res, next) => {
+    const {authToken} = req.body
+    let bearerToken = authToken.toString()
+    console.log(AuthService.verifyJwt(authToken))
+    try {
+                const payload = AuthService.verifyJwt(authToken)
+        
+                AuthService.getUserWithUserName(
+                req.app.get('db'),
+                payload.sub,
+            )
+                .then(user => {
+                if (!user)
+                    return res.status(401).json({ error: 'Unauthorized request' })
+        
+                  next()
+                })
+                .catch(err => {
+                    console.error(err)
+                    next(err)
+                })
+            } catch(error) {
+              res.status(401).json({ error: 'Unauthorized request' })
+            }
+})
 
 module.exports = authRouter
