@@ -1,4 +1,4 @@
-## WeTube
+## WalletWatch
 
 Welcome to WalletWatch, the app that helps you keepm track of daily one-offs, the things that you don't think about buying (like coffee or a bag of chips), but really add up over the course of a month.
 
