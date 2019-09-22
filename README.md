@@ -24,7 +24,7 @@ Here is where you'll keep track of all of those small things you buy throughout 
 
 
 
-Follow [this](https://github.com/bmtron/walletwatch-client) link to discover how the front end client operates.
+Follow [this](https://github.com/bmtron/walletwatch) link to discover how the front end client operates.
 
 ## Technology
 
