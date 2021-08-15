@@ -4,7 +4,7 @@ const knex = require('knex')
 
 const db = knex({
     client: 'pg',
-    connection: DB_URL
+    connection: 'postgresql://bmtron:goalie30@localhost/walletwatch'
 })
 
 app.set('db', db)
